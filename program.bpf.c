@@ -8,9 +8,11 @@
 
 #include <gadget/macros.h>
 #include <gadget/types.h>
+#include <gadget/filter.h>
 
 struct key_t {
   gadget_comm comm[TASK_COMM_LEN];
+  gadget_mntns_id mntns_id;
 };
 
 struct value_t {
@@ -30,9 +32,16 @@ SEC("kprobe/udp_sendmsg")
 int BPF_KPROBE(probe_udp_sendmsg, struct sock *sk) {
   struct key_t key = {};
   struct value_t *value;
+  __u64 mntns_id;
+
+  /* Filter by container using gadget helpers */
+    if (gadget_should_discard_data_current())
+      return 0;
+    mntns_id = gadget_get_current_mntns_id();
 
   /* Get the current process name */
   bpf_get_current_comm(&key.comm, sizeof(key.comm));
+  key.mntns_id = mntns_id;
 
   /* Lookup or initialize value */
   value = bpf_map_lookup_elem(&stats, &key);
