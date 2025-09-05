@@ -7,4 +7,15 @@ paramDefaults:
 datasources:
   packetcounter:
     annotations:
+      metrics.collect: true
       cli.clear-screen-before: "true"
+    fields:
+      k8s.podName:
+        annotations:
+          metrics.type: key
+      comm:
+        annotations:
+          metrics.type: key
+      packets:
+        annotations:
+          metrics.type: counter
