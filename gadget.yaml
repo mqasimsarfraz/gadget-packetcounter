@@ -1,0 +1,10 @@
+name: packetcounter
+description: Counts UDP packets and displays the count in real-time.
+homepageURL: https://inspektor-gadget.io/
+sourceURL: https://github.com/mqasimsarfraz/gadget-packetcounter
+paramDefaults:
+  operator.oci.ebpf.map-fetch-interval: "10s"
+datasources:
+  packetcounter:
+    annotations:
+      cli.clear-screen-before: "true"
