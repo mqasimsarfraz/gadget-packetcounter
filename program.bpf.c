@@ -9,6 +9,7 @@
 #include <gadget/macros.h>
 #include <gadget/types.h>
 
+/* See https://inspektor-gadget.io/docs/latest/gadget-devel/gadget-ebpf-api for additional info */
 struct key_t {
   gadget_comm comm[TASK_COMM_LEN];
 };
@@ -17,6 +18,7 @@ struct value_t {
   __u64 packets;
 };
 
+/* See https://docs.ebpf.io/linux/map-type/ for additional map types */
 struct {
   __uint(type, BPF_MAP_TYPE_HASH);
   __uint(max_entries, 1024);
@@ -24,8 +26,10 @@ struct {
   __type(value, struct value_t);
 } stats SEC(".maps");
 
+/* See https://inspektor-gadget.io/docs/latest/gadget-devel/gadget-intro for additional info */
 GADGET_MAPITER(packetcounter, stats);
 
+/* See https://docs.ebpf.io/linux/program-type/ for additional program types */
 SEC("kprobe/udp_sendmsg")
 int BPF_KPROBE(probe_udp_sendmsg, struct sock *sk) {
   struct key_t key = {};

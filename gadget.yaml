@@ -3,7 +3,7 @@ description: Counts UDP packets and displays the count in real-time.
 homepageURL: https://inspektor-gadget.io/
 sourceURL: https://github.com/mqasimsarfraz/gadget-packetcounter
 paramDefaults:
-  operator.oci.ebpf.map-fetch-interval: "10s"
+  operator.oci.ebpf.map-fetch-interval: "5s"
 datasources:
   packetcounter:
     annotations:

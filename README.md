@@ -2,6 +2,11 @@
 
 Counts the number of UDP packets sent and displays the count in real-time.
 
+## Prerequisites
+
+- Ensure you have `ig` installed. Follow the installation instructions from the [official website](https://inspektor-gadget.io/docs/latest/reference/install-linux#install-a-specific-release)
+- Linux machine and `sudo` privileges.
+
 ## Running the Gadget
 
 ```bash
